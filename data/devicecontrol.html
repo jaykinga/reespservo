@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+        <link rel="stylesheet" href="devicecontrol.css">
+        <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <title>设备控制台</title>
+</head>
+
+<body onload="remaincounts()"><datalist id="Z">
+                <option>10</option>
+                <option>20</option>
+                <option>30</option>
+                <option>40</option>
+                <option>50</option>
+                <option>60</option>
+                <option>70</option>
+                <option>80</option>
+                <option>90</option>
+                <option>100</option>
+        </datalist>
+        <div class="main" id="root">
+                <div class="title">
+                        <span>正果党群设备控制台</span>
+                        <br>
+                        <span id="count">999</span>
+                </div>
+                <div class="view">
+                        <div class="switch">
+                                <div class="item"><img
+                                                src="https://s2.loli.net/2022/03/29/xhUvLnCDA1TWQ2u.jpg"><span>展厅</span><button
+                                                @click="deviceControl('/zhanting/on')">开启</button><button
+                                                @click="deviceControl('/zhanting/off')">关闭</button></div>
+                                <div class="item"><img
+                                                src="https://s2.loli.net/2022/03/29/sU5Wge2Nwx9M6XR.jpg"><span>门前</span><button
+                                                @click="deviceControl('/menqian/on')">开启</button><button
+                                                @click="deviceControl('/menqian/off')">关闭</button></div>
+                                <div class="item"><img
+                                                src="https://s2.loli.net/2022/03/29/DB3c1uOlZiA75xM.jpg"><span>人大</span><button
+                                                @click="deviceControl('/renda/on')">开启</button><button
+                                                @click="deviceControl('/renda/off')">关闭</button></div>
+                        </div>
+                        <div class="play">
+                                <div class="name"><img
+                                                src="https://s2.loli.net/2022/03/29/ONSx1HPWqJr8AEM.jpg"><span>习近平新时代</span>
+                                </div>
+                                <div class="function">
+                                        <div class="button"><button
+                                                        @click="xutingPlay('/xuting/play')">播放</button><button
+                                                        @click="xutingStop('/xuting/stop')">停止</button><button
+                                                        @click="xutingRestPlay('/xuting/resetplay')">重置</button></div>
+                                        <div><span>音量</span><input type="range" min="0" max="100" step="10" list="Z"
+                                                        v-model="xtvolume"
+                                                        @change="xutingSetVolume('/xuting/setvolume?volume=' + xtvolume)">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="play">
+                                <div class="name"><img
+                                                src="https://s2.loli.net/2022/03/29/4xm97DqWKcJMjuF.jpg"><span>辉煌历程百年巨变</span>
+                                </div>
+                                <div class="function">
+                                        <div class="button"><button
+                                                        @click="shapanPlay('shapan/play')">播放</button><button
+                                                        @click="shapanStop('/shapan/stop')">停止</button><button
+                                                        @click="shapanRestPlay('/shapan/resetplay')">重置</button></div>
+                                        <div><span>音量</span><input type="range" min="0" max="100" step="10" list="Z"
+                                                        v-model="spvolume"
+                                                        @change="shapanSetVolume('/shapan/setvolume?volume=' + spvolume)">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="hall">
+                                <div class="name"><img
+                                                src="https://s2.loli.net/2022/03/29/rtKc4U9QS7MLJR5.jpg"><span>政治生活厅</span>
+                                </div>
+                                <div class="function">
+                                        <div class="button"><button
+                                                        @click="politicsHome('politics/home')">主页</button><button
+                                                        @click="politicsTakePhotoMode('politics/takephotomode')">拍照模式</button><button
+                                                        @click="politicsTakePhoto('politics/takephoto')">拍照</button>
+                                        </div>
+                                        <div class="button"><button
+                                                        @click="politicsWordOfChange('politics/wordofchange')">誓词演变</button><button
+                                                        @click="politicsWordOfParty('politics/wordofparty')">入党誓词</button><button
+                                                        @click="politicsRightsAndObligation('politics/rightsandobligation')">权利与义务</button>
+                                        </div>
+                                        <div class="button"><button
+                                                        @click="politicsSong('politics/song')">爱国歌曲</button><button
+                                                        @click="politicsPrevious('politics/previous')">上一首</button><button
+                                                        @click="politicsNext('politics/next')">下一首</button></div>
+                                        <div><span>音量</span><input type="range" min="0" max="100" step="10" list="Z"
+                                                        v-model="zzvolume"
+                                                        @change="politicsSetVolume('/politics/setvolume?volume=' + zzvolume)">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="last">
+                                <div class="TV"><Button name="电视1-1" @click="TVControl">电视1-1</Button><Button
+                                                name="电视3-1" @click="TVControl">电视3-1</Button><Button name="电视3-2"
+                                                @click="TVControl">电视3-2</Button><Button name="电视3-3"
+                                                @click="TVControl">电视3-3</Button><Button name="电视2-1"
+                                                @click="TVControl">电视2-1</Button><Button name="电视2-2"
+                                                @click="TVControl">电视2-2</Button></div>
+                                <div class="light"><button @click="lightControl" name="on">展厅灯全开</button><button
+                                                @click="lightControl" name="off">展厅灯全关</button></div>
+                        </div>
+                </div>
+        </div>
+        <script type="text/javascript" src="devicecontrol.js"></script>
+        <script>
+
+                function remaincounts() {
+                        axios("/remaincounts").then(res => {
+                                var remaincounts = document.getElementById("count");
+                                remaincounts.innerHTML = res.data + "次"
+                                console.log(res)
+                        })
+                                .catch(res => {
+                                        console.log(res)
+                                })
+                }
+
+        </script>
+</body>
+
+</html>

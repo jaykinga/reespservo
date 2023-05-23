@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+	body {
+		margin: 0px;
+		padding: 0px;
+		overflow: hidden;
+	}
+
+	.mainDiv {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background: url("https://s2.loli.net/2022/03/24/gCucj5xFU6BTp3d.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+
+	button {
+		width: 100%;
+		background-color: #862d2d;
+		border: none;
+		color: white;
+		padding: 10px 50px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		cursor: pointer;
+		/* 指针/手形图标 */
+		font-weight: 700;
+		margin-top: 10px;
+	}
+
+	/* 清除浮动 */
+	button:after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+
+	button:not(:last-child) {
+		border-right: none;
+		/* 防止边框重叠 */
+	}
+
+	/* 鼠标移动到按钮上的效果 */
+	button:hover {
+		background-color: #cf6466;
+	}
+
+	.tipbasic {
+		text-align: center;
+		font-size: 15px;
+		text-decoration: underline;
+		color: black;
+	}
+
+	.err {
+		color: #f6070b;
+	}
+
+	.divform {
+		height: 80%;
+		width: 80%;
+		border-radius: 5px;
+		background-color: #eeecf5;
+		filter: alpha(Opacity=10);
+		-moz-opacity: 0.9;
+		opacity: 0.9;
+		margin: 5% auto;
+		padding: 20px;
+		text-align: center;
+	}
+
+</style>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+
+<body>
+	<div class="mainDiv" id="root">
+		<div class="divform">
+			<h1 style="text-align: center;">门禁</h1>
+
+			<button @click="sendCommand('/buttontype.html?type=a&name=全锁A')">全锁A</button>
+			<br>
+			<button @click="sendCommand('/buttontype.html?type=b&name=单向B')">单向B</button>
+			<br>
+			<button @click="sendCommand('/buttontype.html?type=c1&name=点开C1')">点开C1</button>
+			<br>
+			<button @click="sendCommand('/buttontype.html?type=c2&name=常开C2')">常开C2</button>
+			<br>
+			<button @click="sendCommand('/buttontype.html?type=d&name=解锁D')">解锁D</button>
+			<br>
+			<br>
+			<br>
+			<br>
+			<hr>
+			<br>
+			<div class="tipbasic" :class="err">{{result}}</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#root',
+			data: {
+				result: '',
+				err: ''
+
+			},
+			methods: {
+				sendCommand(url) {
+					axios(url).then(
+						res => {
+							console.log(res)
+							this.result = res.data +  '成功' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+							this.err = ''
+						}
+					).catch(err => {
+						console.log(err)
+						this.result = '失败' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+						this.err = 'err'
+					});
+				},
+
+
+			},
+		})
+	</script>
+</body>
+
+</html>

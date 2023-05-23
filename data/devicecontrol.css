@@ -1,0 +1,144 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden
+}
+
+.main {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: url("https://s2.loli.net/2022/03/29/sV8JM6Q1KvArNFf.jpg");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+.view {
+    border-color: #862d2d solid 1px;
+    height: 90%;
+    margin: 10px 10px 10px 10px;
+    padding: 5px 5px 10px 0;
+    background-color: #eeecf5;
+    opacity: .95;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: center
+}
+
+.view::-webkit-scrollbar {
+    display: none
+}
+
+.title {
+    color: #ddd292;
+    background-color: #862d2d;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin: 5px 10px 0 10px
+}
+
+.title #count {
+    font-size: 14px;
+}
+.switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 20px
+}
+
+.switch .item {
+    display: flex;
+    width: 33.3%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #862d2d;
+    margin: 0 0 5px 5px;
+    border-radius: 5px;
+    padding: 5px 0
+}
+
+button {
+    width: 80%;
+    background-color: #862d2d;
+    border: 0;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 5px;
+    border-radius: 5px
+}
+
+button:hover {
+    background-color: #cf6466
+}
+
+input[type=range] {
+    width: 100%;
+    margin: 0
+}
+
+img {
+    width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px
+}
+
+.play,
+.hall {
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #862d2d;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-left: 5px
+}
+
+.play .name,
+.hall .name {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px
+}
+
+.play .function,
+.hall .function {
+    width: 70%;
+    padding: 10px 10px 10px 10px;
+    border-left: 1px solid #862d2d
+}
+
+.play .button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50%
+}
+
+.last {
+    border: #862d2d 1px solid;
+    border-radius: 5px;
+    margin: 5px 0 0 5px;
+    padding: 5px 5px
+}
+
+.hall .button,
+.TV,
+.light {
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}

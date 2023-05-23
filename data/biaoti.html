@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+	body {
+		margin: 0px;
+		padding: 0px;
+		overflow: hidden;
+	}
+
+	.mainDiv {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background: url("https://s2.loli.net/2022/03/24/gCucj5xFU6BTp3d.jpg");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+
+	button {
+		width: 100%;
+		background-color: #862d2d;
+		border: none;
+		color: white;
+		padding: 10px 50px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 15px;
+		cursor: pointer;
+		/* 指针/手形图标 */
+		font-weight: 700;
+		margin-top: 10px;
+	}
+
+	/* 清除浮动 */
+	button:after {
+		content: "";
+		clear: both;
+		display: table;
+	}
+
+	button:not(:last-child) {
+		border-right: none;
+		/* 防止边框重叠 */
+	}
+
+	/* 鼠标移动到按钮上的效果 */
+	button:hover {
+		background-color: #cf6466;
+	}
+
+	.tipbasic {
+		text-align: center;
+		font-size: 15px;
+		text-decoration:underline;
+		color: black;
+	}
+
+	.err {
+		color: #f6070b;
+	}
+
+	.divform {
+		height: 80%;
+		width: 80%;
+		border-radius: 5px;
+		background-color: #eeecf5;
+		filter: alpha(Opacity=10);
+		-moz-opacity: 0.9;
+		opacity: 0.9;
+		margin: 5% auto;
+		padding: 20px;
+		text-align: center;
+	}
+
+	input[type=text] {
+		width: 100%;
+		padding: 10px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+		border: 2px solid red;
+		border-radius: 4px;
+		font-size: 15px;
+	}
+
+	label {
+		font-size: 15px;
+		font-weight: 800;
+		margin-top: 10px;
+		display: flex;
+	}
+</style>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+<body>
+	<div class="mainDiv" id="root">
+		<div class="divform">
+			<h1 style="text-align: center;">会议室标题</h1>
+			<label for="">标题1</label>
+			<input type="text" v-model="caption01" placeholder="请输入标题">
+			<button @click="sendCaption('/biaoticaption01.html?caption01=' + caption01)">提交</button>
+			<br>
+			<label for="">标题2</label>
+			<input type="text" v-model="caption02" placeholder="请输入标题">
+			<button @click="sendCaption('/biaoticaption02.html?caption02=' + caption02)">提交</button>
+			<br>
+			<br>
+			<hr>
+			<button @click="deviceOn('/rendahuiyishi/on.html')">开机</button>
+			<br>
+			<button @click="deviceOff('/rendahuiyishi/off.html')">关机</button>
+			<br>
+			<br>
+			<div class="tipbasic" :class="err">{{result}}</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var vm = new Vue({
+			el: '#root',
+			data: {
+				caption01: '',
+				caption02: '',
+				result: '',
+				err: ''
+
+			},
+			methods: {
+				sendCaption(url) {
+					axios(url).then(
+						res => {
+							console.log(res)
+							this.result = '修改标题成功' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+							this.err = ''
+						}
+					).catch(err => {
+						console.log(err)
+						this.result = '标题修改失败' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+						this.err = 'err'
+					});
+				},
+				deviceOn(url) {
+					axios(url).then(
+						res => {
+							console.log(res)
+							this.result = '开机成功' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+							this.err = ''
+						}
+					).catch(err => {
+						console.log(err)
+						this.result = '开机失败' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+						this.err = 'err'
+					});
+				},
+				deviceOff(url) {
+					axios(url).then(
+						res => {
+							console.log(res)
+							this.result = '关机成功' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+							this.err = ''
+						}
+					).catch(err => {
+						console.log(err)
+						this.result = '关机失败' + '\n' + dayjs().format('YYYY-MM-DDTHH:mm:ss')
+						this.err = 'err'
+					});
+				},
+			},
+		})
+	</script>
+</body>
+
+</html>
