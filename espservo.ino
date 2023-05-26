@@ -16,6 +16,7 @@ void setup()
   if (!(SPIFFS.exists("/reg.txt")))
   {
     Serial.printf("=======================================================");
+    Serial.printf("=======================================================");
     Serial.println("register-file is not exists, system will be stopped!");
     Serial.println("please register app! more information call 18028551016");
     Serial.printf("=======================================================");
